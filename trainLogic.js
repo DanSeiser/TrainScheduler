@@ -21,7 +21,7 @@ $("#add-train-btn").on("click", function(event) {
   var firstTrain = $('#first-train-input').val().trim();
   var trainFrequency = $("#frequency-input").val().trim();
 
-  // Creates local "temporary" object for holding employee data
+  // Creates local "temporary" object for holding Train data
   var newTrain = {
     trainName: trainName,
     destination: trainDestination,
@@ -36,7 +36,7 @@ $("#add-train-btn").on("click", function(event) {
   $('input[type="text"]').val('');
 });
 
-// 3. Create Firebase event for adding employee to the database and a row in the html when a user adds an entry
+// 3. Create Firebase event for adding Train to the database and a row in the html when a user adds an entry
 database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 	var snapVal = childSnapshot.val();
 	console.log(snapVal);
@@ -62,10 +62,10 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 	
 
 
-	/*var trainName = thisSnap.trainName;
-	var destination = thisSnap.destination;
-	var frequency = thisSnap.frequency;
-	var firstTrain = moment(thisSnap.firstTrain, "HH:mm");
+	var trainName = snapVal.trainName;
+	var destination = snapVal.destination;
+	var frequency = snapVal.frequency;
+	var firstTrain = moment(snapVal.firstTrain, "HH:mm");
 	
 	var minutesAway = frequency - (moment().diff(moment.unix(firstTrain, "HH:mm"), "minutes") % frequency);
 	
@@ -76,12 +76,12 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 	console.log(frequency);
 	console.log(firstTrain);
 	console.log(minutesAway);
-	*/
+	
 
 
-/*
+
 	// Add each train's data into the table
-	$("#employee-table > tbody").append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td class='nextTrainFrequency'>" +
+	$("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td class='nextTrainFrequency'>" +
 	frequency + "</td><td class='traintime'>" + nextTrainTime + "</td><td class='nextTrainMinutes'>" + minutesAway + "</td></tr>");
-	*/
+	
 });
